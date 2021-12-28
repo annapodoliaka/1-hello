@@ -1,23 +1,19 @@
 const ACTION_LIST = ['+', '-', '/', '*']
-
 const ACTIONS = {'+': add, '-': sub, '/': div, '*': mult}
 
-const action = getAction ();
-
-const operandsCount = getOperandCount ();
-
+const action = getAction();
+const operandsCount = getOperandCount();
 const operands = getOperands(operandsCount);
-
 const result = calculate(operands, action);
 
 showResult (operands, action, result)
 
 
-function getAction () {
+function getAction() {
   let action;
 
   do {
-    action = prompt( 'Please, enter what arithmetic action do you want to perform? (+ - / *)' );
+    action = prompt('Please, enter what arithmetic action do you want to perform? (+ - / *)');
   } while (!isActionValid(action));
 
   return action;
@@ -28,11 +24,11 @@ function isActionValid(action) {
 }
 
 
-function getOperandCount () {
+function getOperandCount() {
   let count;
 
   do {
-    count = prompt( 'Enter operands count' );
+    count = prompt('Enter operands count');
   } while (!isOperandsCountValid(count));
 
   return count;
