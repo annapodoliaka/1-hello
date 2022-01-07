@@ -1,49 +1,62 @@
-// const quiz = [ 
-//   { question: 'Сколько будет 2+2?', answer: 4, type: 'prompt' },
-//   { question: 'Солнце встает на востоке?', answer: true, type: 'confirm' },
-//   { question: 'Сколько будет 5 / 0 ?', answer: NaN, type: 'prompt' },
-//   { question: 'Какого цвета небo?', answer: 8, type: 'prompt' },
-//   { question: 'Какой правильный ответ на «Главный вопрос жизни, вселенной и всего такого»?', answer: 42, type: 'prompt' }  
-// ];
+const RIGHT_ANSWER = 10;
+const WRONG_ANSWER = 0;
+const QUESTION_TYPE = {
+  PROMPT : 'prompt',
+  CONFIRM : 'confirm',
+};
+const CALLER = {
+  [QUESTION_TYPE.PROMPT]: prompt,
+  [QUESTION_TYPE.CONFIRM]: confirm,
+};
 
-// let points = 0;
+const quiz = [
+  {
+    question: 'Сколько будет 2+2?',
+    answer: '4',
+    type: QUESTION_TYPE.PROMPT,
+  },
+  {
+    question: 'Солнце встает на востоке?',
+    answer: 'true',
+    type: QUESTION_TYPE.CONFIRM,
+  },
+  {
+    question: 'Сколько будет 5 / 0 ?',
+    answer: 'Infinity',
+    type: QUESTION_TYPE.PROMPT,
+  },
+  {
+    question: 'Какого цвета небo?',
+    answer: 'Голубого',
+    type: QUESTION_TYPE.PROMPT,
+  },
+  {
+    question: 'Какой правильный ответ на «Главный вопрос жизни, вселенной и всего такого»?',
+    answer: '42',
+    type: QUESTION_TYPE.PROMPT,
+  },
+]
 
-// const receiveAnswer = question => {
-// let checkType;
+runQuiz(quiz);
 
-// if (question.type === 'prompt') {
-//   checkType = prompt;
-// } else if (question.type === 'confirm') {
-//   checkType = confirm;
-// }
+function runQuiz(quizQuestions) {
+  let score = 0;
 
-// return(checkType(question.question) == question.answer);
-// }
+  quizQuestions.forEach((question) => {
+    score += getUserAnswer(question) === question.answer ? RIGHT_ANSWER : WRONG_ANSWER 
+  })
 
-// quiz.forEach(question => {
-// if (receiveAnswer(question)) {
-// points += 10;
-// }
-// })
-
-// if (points < 40) {
-//   alert( `${points} баллов, ты можешь лучше!` );
-// } else {
-//   alert( `${points} баллов, так держать!` ); 
-// }
-
-let arr = [34, 300000, 529, 12826541, 89.7, 1243, 2000, 55]; 
-
-function max (arr){
-  let max = arr[1];
-
-  for(i = 1; i < arr.length; i + 1){
-    if((arr[i]) > max){
-      max = arr[i]; 
-    } 
-  }
-
-  return max;
+  showResult(score);
 }
 
-console.log(max(arr));
+function getUserAnswer({ question,type }) {
+  const fn = CALLER[type];
+
+  return fn(question);
+}
+
+function showResult(score) {
+  alert( `Ваш результат ${score} баллов!` );
+}
+
+
