@@ -1,0 +1,15 @@
+body {
+  background-color: #99b4c7;
+}
+.title {
+  color: rgb(209, 82, 203);
+}
+.paragraph {
+  color: rgb(31, 18, 209);
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
